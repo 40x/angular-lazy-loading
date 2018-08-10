@@ -4,4 +4,9 @@
 
 <button [routerLink]="[{ outlets: { editprofile: 'edit' } }]">Edit Profile</button>
 
+
+<div *ngIf="loadingedit">
+    Loading Edit Profile...
+</div>
+
 <router-outlet name="editprofile"></router-outlet>

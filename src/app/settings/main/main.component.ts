@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -8,10 +8,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  loadingedit: boolean;
 
-  ngOnInit() {
+  constructor (private router: Router) {}
 
+  ngOnInit () {
+    this.router.events.subscribe(event => {
+        if (event instanceof RouteConfigLoadStart) {
+            this.loadingedit = true;
+        } else if (event instanceof RouteConfigLoadEnd) {
+            this.loadingedit = false;
+        }
+    });
   }
 
 }
